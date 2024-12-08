@@ -2,7 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fungsi untuk menghitung bobot berdasarkan jumlah kriteria dalam setiap kategori
     function calculateWeights() {
         // Mencari semua tabel
-        const tables = document.querySelectorAll('table');
+        const tables = document.querySelectorAll('table.hidden-table');
+        const combinedTable = document.querySelector('table:not(.hidden-table)');
+        const combinedRows = combinedTable.querySelectorAll('tbody tr');
+
+        let rowIndex = 0;
+        let currentRow = combinedRows[rowIndex];
 
         tables.forEach(table => {
             // Mencari semua baris tabel
@@ -12,10 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Menghitung bobot
             const weight = 1 / numCriteria;
 
-            // Menampilkan proses perhitungan bobot di bawah tabel
-            const weightCalculation = document.createElement('div');
-            weightCalculation.textContent = `Bobot kriteria: Wj = 1/${numCriteria} = ${weight.toFixed(2)}`;
-            table.parentNode.insertBefore(weightCalculation, table.nextSibling);
+            // Menampilkan data di console
+            console.log(`Bobot kriteria: Wj = 1/${numCriteria} = ${weight.toFixed(2)}`);
 
             // Memasukkan hasil bobot ke kolom bobot
             rows.forEach(row => {
@@ -27,30 +30,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Menghitung skor akhir
             let totalScore = 0;
-            let scoreDetails = [];
             rows.forEach(row => {
                 const scoreCell = row.querySelector('td:nth-child(3)');
                 const score = parseFloat(scoreCell.textContent);
-                const criteria = row.querySelector('td:nth-child(1)').textContent.trim();
-                const weightedScore = weight * score;
-                totalScore += weightedScore;
-                scoreDetails.push(`(${weight.toFixed(2)} × ${score}) = ${weightedScore.toFixed(2)}`);
+                totalScore += weight * score;
             });
 
-            // Menampilkan perhitungan skor akhir di bawah perhitungan bobot
-            const scoreCalculation = document.createElement('div');
-            scoreCalculation.textContent = `Perhitungan Kriteria (Wj x rij) = ${scoreDetails.join(' + ')}`;
-            table.parentNode.insertBefore(scoreCalculation, weightCalculation.nextSibling);
+            // Menampilkan skor akhir di console
+            console.log(`Skor akhir: Vi = ∑_(j=1)^n (Wj × rij) = ${totalScore.toFixed(2)}`);
 
-            // Menampilkan total skor akhir
-            const totalScoreCalculation = document.createElement('div');
-            totalScoreCalculation.textContent = `${totalScore.toFixed(2)} = ${totalScore.toFixed(2)}`;
-            table.parentNode.insertBefore(totalScoreCalculation, scoreCalculation.nextSibling);
-
-            // Menampilkan skor akhir
-            const finalScoreCalculation = document.createElement('div');
-            finalScoreCalculation.textContent = `Skor akhir: Vi = ∑_(j=1)^n (Wj × rij) = ${totalScore.toFixed(2)}`;
-            table.parentNode.insertBefore(finalScoreCalculation, totalScoreCalculation.nextSibling);
+            // Menambahkan skor akhir ke tabel gabungan
+            if (table.previousElementSibling.textContent.includes('Gaming')) {
+                currentRow.querySelector('.gaming-score').textContent = totalScore.toFixed(2);
+            } else if (table.previousElementSibling.textContent.includes('Fotografi')) {
+                currentRow.querySelector('.fotografi-score').textContent = totalScore.toFixed(2);
+            } else if (table.previousElementSibling.textContent.includes('Konten Kreator')) {
+                currentRow.querySelector('.konten-kreator-score').textContent = totalScore.toFixed(2);
+            } else if (table.previousElementSibling.textContent.includes('Sehari-hari')) {
+                currentRow.querySelector('.sehari-hari-score').textContent = totalScore.toFixed(2);
+                rowIndex++;
+                currentRow = combinedRows[rowIndex];
+            }
         });
     }
 
