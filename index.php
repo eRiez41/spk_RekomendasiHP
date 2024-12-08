@@ -71,8 +71,8 @@ $data = $data[0];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skoring HP</title>
-    <script src="skoring.js" defer></script>
-    <script src="rumus.js" defer></script>
+    <script src="js/skoring.js" defer></script>
+    <script src="js/rumus.js" defer></script>
 </head>
 <body>
     <h1>Skoring HP</h1>
