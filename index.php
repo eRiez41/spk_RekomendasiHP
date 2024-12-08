@@ -1,6 +1,6 @@
 <?php
-include 'sql.php';
-include 'navbar.php';
+include 'sql/sql.php';
+include 'component/navbar.php';
 
 // Fungsi untuk menentukan kategori resolusi layar
 function getResolutionCategory($resolution) {
@@ -70,7 +70,7 @@ $data = $data[0];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skoring HP</title>
+    <title>Skoring Per HP</title>
     <script src="js/skoring.js" defer></script>
     <script src="js/rumus.js" defer></script>
 </head>

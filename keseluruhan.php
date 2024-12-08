@@ -1,6 +1,6 @@
 <?php
-include 'sqlkeseluruhan.php';
-include 'navbar.php';
+include 'sql/sqlkeseluruhan.php';
+include 'component/navbar.php';
 
 
 function getResolutionCategory($resolution) {
@@ -103,7 +103,7 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skoring HP</title>
+    <title>Skoring HP Keseluruhan</title>
     <style>
         .hidden-column {
             display: none;

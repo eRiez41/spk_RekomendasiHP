@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include __DIR__ . '/../koneksi/koneksi.php';
 
 // Query untuk mendapatkan ID secara acak
 $query = "

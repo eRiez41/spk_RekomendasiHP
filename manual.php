@@ -1,4 +1,4 @@
-<? include 'navbar.php'; ?>
+<? include 'component/navbar.php'; ?>
 
 
 <!DOCTYPE html>
@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual</title>
+    <title>Skoring HP Manual</title>
     <style>
         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
         th, td { border: 1px solid black; padding: 8px; text-align: left; }
@@ -113,7 +113,7 @@
             );
         }
     </script>
-    <script src="skoringmanual.js"></script>
-    <script src="rumusmanual.js"></script>
+    <script src="js/skoringmanual.js"></script>
+    <script src="js/rumusmanual.js"></script>
 </body>
 </html>
