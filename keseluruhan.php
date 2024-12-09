@@ -1,7 +1,5 @@
 <?php
 include 'sql/sqlkeseluruhan.php';
-include 'component/navbar.php';
-
 
 function getResolutionCategory($resolution) {
     // Menggunakan ekspresi reguler untuk memisahkan lebar dan tinggi
@@ -62,7 +60,7 @@ function createTable($title, $criteria, $data) {
 // Fungsi untuk membuat tabel gabungan
 function createCombinedTable($data) {
     echo "<h2>Tabel Gabungan</h2>";
-    echo "<table border='1'>";
+    echo "<table border='1' id='combined-table'>";
     echo "<thead>";
     echo "<tr>";
     echo "<th>ID HP</th>";
@@ -103,7 +101,7 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skoring HP Keseluruhan</title>
+    <title>Skoring HP</title>
     <style>
         .hidden-column {
             display: none;
@@ -117,6 +115,7 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
     </style>
     <script src="js/skoringkeseluruhan.js" defer></script>
     <script src="js/rumuskeseluruhan.js" defer></script>
+    <script src="js/convert.js" defer></script>
 </head>
 <body>
     <h1 class="hidden-element">Skoring HP</h1>
@@ -143,5 +142,7 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
     // Membuat tabel gabungan
     createCombinedTable($data);
     ?>
+
+    <button id="export-btn">Import ke JSON</button>
 </body>
 </html>
