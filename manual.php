@@ -19,11 +19,12 @@
     <script>
         const categories = ['Gaming', 'Fotografi', 'Konten Kreator', 'Sehari-hari'];
         const criteriaTemplates = {
-            'Gaming': ['RAM', 'Memori Internal', 'Skor Antutu', 'Kapasitas Baterai', 'Teknologi Layar', 'Daya Fast Charging'],
-            'Fotografi': ['Resolusi Kamera Belakang', 'Memori Internal', 'Skor Antutu', 'Kapasitas Baterai', 'Teknologi Layar', 'Resolusi Layar'],
-            'Konten Kreator': ['Resolusi Kamera Belakang', 'Resolusi Kamera Depan', 'Memori Internal', 'Skor Antutu', 'Kapasitas Baterai', 'Daya Fast Charging'],
-            'Sehari-hari': ['RAM', 'Memori Internal', 'Skor Antutu', 'Kapasitas Baterai', 'Teknologi Layar', 'Daya Fast Charging']
-        };
+        'Gaming': ['RAM', 'Memori Internal', 'Skor Antutu', 'Kapasitas Baterai', 'Teknologi Layar'],
+        'Fotografi': ['Resolusi Kamera Belakang', 'Resolusi Kamera Depan', 'Memori Internal', 'Resolusi Layar', 'Teknologi Layar'],
+        'Konten Kreator': ['Resolusi Kamera Belakang', 'Resolusi Kamera Depan', 'Memori Internal', 'Kapasitas Baterai', 'Daya Fast Charging'],
+        'Sehari-hari': ['RAM', 'Memori Internal', 'Skor Antutu', 'Kapasitas Baterai', 'Resolusi Layar']
+    };
+
 
         const specs = {
             "RAM": ["4", "6", "8", "12"],

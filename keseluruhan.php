@@ -1,5 +1,7 @@
 <?php
 include 'sql/sqlkeseluruhan.php';
+include 'component/navbar.php';
+
 
 function getResolutionCategory($resolution) {
     // Menggunakan ekspresi reguler untuk memisahkan lebar dan tinggi
