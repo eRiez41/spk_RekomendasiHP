@@ -2,7 +2,6 @@
 include 'sql/sqlkeseluruhan.php';
 include 'component/navbar.php';
 
-
 function getResolutionCategory($resolution) {
     // Menggunakan ekspresi reguler untuk memisahkan lebar dan tinggi
     if (preg_match('/(\d+)\D+(\d+)/', $resolution, $matches)) {
@@ -24,7 +23,6 @@ function getResolutionCategory($resolution) {
         return 'Unknown';
     }
 }
-
 
 // Fungsi untuk membuat tabel berdasarkan kriteria
 function createTable($title, $criteria, $data) {
@@ -71,18 +69,22 @@ function createCombinedTable($data) {
     echo "<th>Fotografi</th>";
     echo "<th>Konten Kreator</th>";
     echo "<th>Sehari-hari</th>";
+    echo "<th>Harga</th>";
     echo "</tr>";
     echo "</thead>";
     echo "<tbody>";
 
     foreach ($data as $hp) {
+        // Hapus simbol mata uang dan format harga
+        $harga = str_replace(['Rp ', '.'], '', $hp['Harga']);
         echo "<tr>";
         echo "<td>{$hp['id']}</td>";
-        echo "<td>{$hp['Brand']} {$hp['Nama Produk']}</td>";
+        echo "<td>{$hp['Brand']} - {$hp['Nama Produk']} {$hp['RAM (GB)']}/{$hp['Memori Internal (GB)']}</td>";
         echo "<td class='gaming-score'></td>";
         echo "<td class='fotografi-score'></td>";
         echo "<td class='konten-kreator-score'></td>";
         echo "<td class='sehari-hari-score'></td>";
+        echo "<td>" . number_format($harga, 0, ',', '.') . "</td>"; // Format harga
         echo "</tr>";
     }
 
@@ -91,10 +93,10 @@ function createCombinedTable($data) {
 }
 
 // Data kriteria untuk setiap tabel
-$gamingCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapasitas Baterai", "Technology", "Daya Fast Charging"];
-$fotografiCriteria = ["Resolusi Kamera Belakang", "Memori Internal (GB)", "Skor_AnTuTu", "Kapasitas Baterai", "Technology", "Screen Resolution"];
-$kontenKreatorCriteria = ["Resolusi Kamera Belakang", "Resolusi Kamera Depan", "Memori Internal (GB)", "Skor_AnTuTu", "Kapasitas Baterai", "Daya Fast Charging"];
-$sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapasitas Baterai", "Technology", "Daya Fast Charging"];
+$gamingCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapasitas Baterai", "Technology"];
+$fotografiCriteria = ["Resolusi Kamera Belakang", "Resolusi Kamera Depan", "Memori Internal (GB)", "Screen Resolution", "Technology"];
+$kontenKreatorCriteria = ["Resolusi Kamera Belakang", "Resolusi Kamera Depan", "Memori Internal (GB)", "Kapasitas Baterai", "Daya Fast Charging"];
+$sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapasitas Baterai", "Screen Resolution"];
 
 ?>
 

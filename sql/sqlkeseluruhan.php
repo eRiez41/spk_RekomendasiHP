@@ -38,6 +38,8 @@ $query = "
         spek_hp sp
     JOIN
         soc s ON sp.Prosesor LIKE CONCAT('%', s.processor, '%')
+    ORDER BY
+        sp.id ASC;
 ";
 
 $result = $conn->query($query);
