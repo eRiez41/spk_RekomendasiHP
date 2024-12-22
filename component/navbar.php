@@ -25,6 +25,7 @@
         <a href="manual.php">Manual</a>
         <a href="index.php">Per HP</a>
         <a href="keseluruhan.php">Keseluruhan</a>
+        <a href="pemilihan.php">Pemilihan</a>
     </div>
 </body>
 </html>
