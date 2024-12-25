@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedBrandProducts = [];
     let selectedPriceRange = '';
     let selectedCategory = '';
+    let selectedNFC = false;
+    let selectedWaterproof = false;
+    let selectedJack = false;
 
     // Fungsi untuk menghitung bobot berdasarkan jumlah kriteria dalam setiap kategori
     function calculateWeights() {
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Fungsi untuk menangkap data brand dan nama produk dari tabel dan membuat combo box baru
+    // Fungsi untuk menangkap data brand dan nama produk dari tabel dan membuat checkbox baru
     function captureBrandData() {
         const combinedTable = document.querySelector('table:not(.hidden-table)');
         const combinedRows = combinedTable.querySelectorAll('tbody tr');
@@ -76,38 +79,48 @@ document.addEventListener('DOMContentLoaded', function() {
             brandDataMap.get(brandName).push(productData);
         });
 
-        // Membuat combo box baru
+        // Membuat checkbox baru
         const resultComboBoxContainer = document.createElement('div');
         resultComboBoxContainer.innerHTML = `
             <h2>Proses Pemilihan</h2>
-            <select id="brand-combo-box">
-                <option value="">Pilih Brand</option>
-            </select>
+            <div id="brand-checkbox-container"></div>
         `;
 
-        const comboBox = resultComboBoxContainer.querySelector('#brand-combo-box');
+        const checkboxContainer = resultComboBoxContainer.querySelector('#brand-checkbox-container');
         brandDataMap.forEach((products, brand) => {
-            const option = document.createElement('option');
-            option.value = brand;
-            option.textContent = brand;
-            comboBox.appendChild(option);
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = brand;
+            checkbox.id = `brand-checkbox-${brand}`;
+
+            const label = document.createElement('label');
+            label.htmlFor = `brand-checkbox-${brand}`;
+            label.textContent = brand;
+
+            checkboxContainer.appendChild(checkbox);
+            checkboxContainer.appendChild(label);
+            checkboxContainer.appendChild(document.createElement('br'));
         });
 
-        // Menambahkan combo box baru ke dokumen
+        // Menambahkan checkbox baru ke dokumen
         document.body.appendChild(resultComboBoxContainer);
 
-        // Menambahkan event listener untuk combo box
-        comboBox.addEventListener('change', function() {
-            const selectedBrand = comboBox.value;
-            selectedBrandProducts = brandDataMap.get(selectedBrand);
+        // Menambahkan event listener untuk checkbox
+        checkboxContainer.addEventListener('change', function() {
+            const selectedBrands = Array.from(checkboxContainer.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value);
+            selectedBrandProducts = [];
+            selectedBrands.forEach(brand => {
+                selectedBrandProducts = selectedBrandProducts.concat(brandDataMap.get(brand));
+            });
             clearPreviousData();
-            displaySelectedBrandData(selectedBrand, brandDataMap);
+            displaySelectedBrandData(selectedBrands, brandDataMap);
         });
     }
 
-    // Fungsi untuk menampilkan data lengkap sesuai dengan pilihan combo box
-    function displaySelectedBrandData(selectedBrand, brandDataMap) {
-        const products = brandDataMap.get(selectedBrand);
+    // Fungsi untuk menampilkan data lengkap sesuai dengan pilihan checkbox
+    function displaySelectedBrandData(selectedBrands, brandDataMap) {
+        const products = selectedBrandProducts;
 
         // Membuat tabel lengkap baru
         const resultTableContainer = document.createElement('div');
@@ -122,6 +135,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         <th>Fotografi</th>
                         <th>Konten Kreator</th>
                         <th>Sehari-hari</th>
+                        <th>NFC</th>
+                        <th>Waterproof</th>
+                        <th>3.5mm Jack</th>
                         <th>Harga</th>
                     </tr>
                 </thead>
@@ -155,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Membuat combo box harga dan kategori
         createPriceRangeComboBox();
+        createFeatureCheckboxes();
         createCategoryComboBox();
     }
 
@@ -194,6 +211,52 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Fungsi untuk membuat checkbox fitur (NFC, Waterproof, 3.5mm Jack)
+    function createFeatureCheckboxes() {
+        const featureCheckboxContainer = document.getElementById('feature-checkbox-container');
+        if (!featureCheckboxContainer) {
+            const newFeatureCheckboxContainer = document.createElement('div');
+            newFeatureCheckboxContainer.id = 'feature-checkbox-container';
+            newFeatureCheckboxContainer.innerHTML = `
+                <h2>Filter Fitur</h2>
+                <label>
+                    <input type="checkbox" id="nfc-checkbox"> NFC
+                </label>
+                <label>
+                    <input type="checkbox" id="waterproof-checkbox"> Waterproof
+                </label>
+                <label>
+                    <input type="checkbox" id="jack-checkbox"> 3.5mm Jack
+                </label>
+            `;
+
+            const nfcCheckbox = newFeatureCheckboxContainer.querySelector('#nfc-checkbox');
+            const waterproofCheckbox = newFeatureCheckboxContainer.querySelector('#waterproof-checkbox');
+            const jackCheckbox = newFeatureCheckboxContainer.querySelector('#jack-checkbox');
+
+            // Menambahkan checkbox fitur ke dokumen
+            document.body.appendChild(newFeatureCheckboxContainer);
+
+            // Menambahkan event listener untuk checkbox NFC
+            nfcCheckbox.addEventListener('change', function() {
+                selectedNFC = nfcCheckbox.checked;
+                applyFilters();
+            });
+
+            // Menambahkan event listener untuk checkbox Waterproof
+            waterproofCheckbox.addEventListener('change', function() {
+                selectedWaterproof = waterproofCheckbox.checked;
+                applyFilters();
+            });
+
+            // Menambahkan event listener untuk checkbox 3.5mm Jack
+            jackCheckbox.addEventListener('change', function() {
+                selectedJack = jackCheckbox.checked;
+                applyFilters();
+            });
+        }
+    }
+
     // Fungsi untuk membuat combo box kategori
     function createCategoryComboBox() {
         const categoryComboBoxContainer = document.getElementById('category-combo-box-container');
@@ -224,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Fungsi untuk menerapkan filter harga dan kategori secara bersamaan
+    // Fungsi untuk menerapkan filter harga, fitur, dan kategori secara bersamaan
     function applyFilters() {
         let filteredProducts = selectedBrandProducts;
 
@@ -238,6 +301,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 const priceCell = productData[productData.length - 1];
                 const price = parseInt(priceCell.textContent.trim().replace(/\D/g, ''), 10);
                 return price >= minPrice && price <= maxPrice;
+            });
+        }
+
+        // Filter berdasarkan NFC
+        if (selectedNFC) {
+            filteredProducts = filteredProducts.filter(productData => {
+                const nfcCell = productData[productData.length - 4];
+                const nfcValue = nfcCell.textContent.trim();
+                return nfcValue === 'True';
+            });
+        }
+
+        // Filter berdasarkan Waterproof
+        if (selectedWaterproof) {
+            filteredProducts = filteredProducts.filter(productData => {
+                const waterproofCell = productData[productData.length - 3];
+                const waterproofValue = waterproofCell.textContent.trim();
+                return waterproofValue === 'True';
+            });
+        }
+
+        // Filter berdasarkan 3.5mm Jack
+        if (selectedJack) {
+            filteredProducts = filteredProducts.filter(productData => {
+                const jackCell = productData[productData.length - 2];
+                const jackValue = jackCell.textContent.trim();
+                return jackValue === 'True';
             });
         }
 
@@ -268,6 +358,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         <th>ID HP</th>
                         <th>Brand dan Nama Produk</th>
                         <th>${selectedCategory}</th>
+                        <th>NFC</th>
+                        <th>Waterproof</th>
+                        <th>3.5mm Jack</th>
                         <th>Harga</th>
                     </tr>
                 </thead>
@@ -282,6 +375,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const idCell = productData[0];
             const brandCell = productData[1];
             const categoryCell = productData[getCategoryIndex(selectedCategory)];
+            const nfcCell = productData[productData.length - 4];
+            const waterproofCell = productData[productData.length - 3];
+            const jackCell = productData[productData.length - 2];
             const priceCell = productData[productData.length - 1];
 
             const newIdCell = document.createElement('td');
@@ -295,6 +391,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const newCategoryCell = document.createElement('td');
             newCategoryCell.textContent = categoryCell.textContent.trim();
             row.appendChild(newCategoryCell);
+
+            const newNfcCell = document.createElement('td');
+            newNfcCell.textContent = nfcCell.textContent.trim();
+            row.appendChild(newNfcCell);
+
+            const newWaterproofCell = document.createElement('td');
+            newWaterproofCell.textContent = waterproofCell.textContent.trim();
+            row.appendChild(newWaterproofCell);
+
+            const newJackCell = document.createElement('td');
+            newJackCell.textContent = jackCell.textContent.trim();
+            row.appendChild(newJackCell);
 
             const newPriceCell = document.createElement('td');
             newPriceCell.textContent = priceCell.textContent.trim();
@@ -347,12 +455,20 @@ document.addEventListener('DOMContentLoaded', function() {
             existingPriceComboBoxContainer.remove();
         }
 
+        const existingFeatureCheckboxContainer = document.getElementById('feature-checkbox-container');
+        if (existingFeatureCheckboxContainer) {
+            existingFeatureCheckboxContainer.remove();
+        }
+
         const existingCategoryComboBoxContainer = document.getElementById('category-combo-box-container');
         if (existingCategoryComboBoxContainer) {
             existingCategoryComboBoxContainer.remove();
         }
 
         selectedPriceRange = '';
+        selectedNFC = false;
+        selectedWaterproof = false;
+        selectedJack = false;
         selectedCategory = '';
     }
 

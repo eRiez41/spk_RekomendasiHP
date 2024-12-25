@@ -1,5 +1,5 @@
 <?php
-include 'sql/sqlkeseluruhan.php';
+include 'sql/sqlpemilihan.php';
 include 'component/navbar.php';
 
 function getResolutionCategory($resolution) {
@@ -65,6 +65,9 @@ function createCombinedTable($data) {
     echo "<th>Fotografi</th>";
     echo "<th>Konten Kreator</th>";
     echo "<th>Sehari-hari</th>";
+    echo "<th>NFC</th>";
+    echo "<th>Waterproof</th>";
+    echo "<th>3.5mm Jack</th>";
     echo "<th>Harga</th>";
     echo "</tr>";
     echo "</thead>";
@@ -79,6 +82,9 @@ function createCombinedTable($data) {
         echo "<td class='fotografi-score'></td>";
         echo "<td class='konten-kreator-score'></td>";
         echo "<td class='sehari-hari-score'></td>";
+        echo "<td>{$hp['NFC']}</td>";
+        echo "<td>{$hp['Waterproof']}</td>";
+        echo "<td>{$hp['3.5mm Jack']}</td>";
         echo "<td>" . number_format($harga, 0, ',', '.') . "</td>";
         echo "</tr>";
     }
@@ -149,7 +155,6 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
     createCombinedTable($data);
     ?>
 
-
     <!-- Elemen untuk menampung combo box baru -->
     <div id="result-combo-box-container"></div>
 
@@ -169,4 +174,3 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
     </div>
 </body>
 </html>
-
