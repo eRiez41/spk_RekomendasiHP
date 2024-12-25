@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f5f5f7;
+}
+
+.container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-center h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.text-center p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.hidden-column {
+    display: none;
+}
+
+.hidden-table {
+    display: none;
+}
+
+.hidden-element {
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    background-color: #f9f9f9;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+    text-align: left;
+}
+
+th {
+    background-color: #f1f1f1;
+    cursor: pointer;
+    position: relative;
+}
+
+.sort-icon {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.sort-icon.asc::after {
+    content: '↑';
+}
+
+.sort-icon.desc::after {
+    content: '↓';
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007aff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    background-color: #004494;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .text-center h1 {
+        font-size: 1.5rem;
+    }
+
+    .text-center p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .text-center h1 {
+        font-size: 1.2rem;
+    }
+
+    .text-center p {
+        font-size: 0.8rem;
+    }
+}
