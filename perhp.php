@@ -23,35 +23,44 @@ function getResolutionCategory($resolution) {
 
 // Fungsi untuk membuat tabel berdasarkan kriteria
 function createTable($title, $criteria, $data) {
-    echo "<h2>$title</h2>";
-    echo "<table border='1'>";
-    echo "<thead>";
-    echo "<tr>";
-    echo "<th>Kriteria</th>";
-    echo "<th>Spesifikasi</th>";
-    echo "<th>Skor</th>";
-    echo "<th>Bobot</th>";
-    echo "</tr>";
-    echo "</thead>";
-    echo "<tbody>";
+    $tableContainer = '<div class="table-container">';
+    $tableContainer .= '<div class="toggle-button">';
+    $tableContainer .= '<span class="icon">▼</span>';
+    $tableContainer .= '<span class="category">' . $title . '</span>';
+    $tableContainer .= '</div>';
+    $tableContainer .= '<div class="content">';
+    $tableContainer .= '<table border="1">';
+    $tableContainer .= '<thead>';
+    $tableContainer .= '<tr>';
+    $tableContainer .= '<th>Kriteria</th>';
+    $tableContainer .= '<th>Spesifikasi</th>';
+    $tableContainer .= '<th>Skor</th>';
+    $tableContainer .= '<th>Bobot</th>';
+    $tableContainer .= '</tr>';
+    $tableContainer .= '</thead>';
+    $tableContainer .= '<tbody>';
 
     foreach ($criteria as $criterion) {
-        echo "<tr>";
-        echo "<td>$criterion</td>";
+        $tableContainer .= '<tr>';
+        $tableContainer .= '<td>' . $criterion . '</td>';
         if ($criterion === 'Screen Resolution') {
             $resolution = $data[$criterion];
             $category = getResolutionCategory($resolution);
-            echo "<td>$resolution ($category)</td>";
+            $tableContainer .= '<td>' . $resolution . ' (' . $category . ')</td>';
         } else {
-            echo "<td>" . (isset($data[$criterion]) ? $data[$criterion] : '') . "</td>";
+            $tableContainer .= '<td>' . (isset($data[$criterion]) ? $data[$criterion] : '') . '</td>';
         }
-        echo "<td></td>";
-        echo "<td></td>";
-        echo "</tr>";
+        $tableContainer .= '<td></td>';
+        $tableContainer .= '<td></td>';
+        $tableContainer .= '</tr>';
     }
 
-    echo "</tbody>";
-    echo "</table>";
+    $tableContainer .= '</tbody>';
+    $tableContainer .= '</table>';
+    $tableContainer .= '</div>';
+    $tableContainer .= '</div>';
+
+    return $tableContainer;
 }
 
 // Data kriteria untuk setiap tabel
@@ -80,45 +89,60 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skoring Per HP</title>
+<link rel="stylesheet" href="style/perhp.css">
     <script src="js/modulPerHP/skoring.js" defer></script>
     <script src="js/modulPerHP/rumus.js" defer></script>
 </head>
 <body>
-    <h1>Skoring HP</h1>
+    <div class="container mt-5">
+        <h1 class="text-center">Skoring HP</h1>
 
-    <!-- Dropdown untuk memilih smartphone -->
-    <form method="GET" action="">
-        <label for="smartphone">Pilih Smartphone:</label>
-        <select name="id" id="smartphone" onchange="this.form.submit()">
-            <option value="">Pilih Smartphone</option>
-            <?php foreach ($smartphones as $smartphone): ?>
-                <option value="<?php echo $smartphone['id']; ?>" <?php echo ($selectedId == $smartphone['id']) ? 'selected' : ''; ?>>
-                    <?php echo $smartphone['Brand'] . ' - ' . $smartphone['Nama Produk'] . ' ' . $smartphone['RAM (GB)'] . '/' . $smartphone['Memori Internal (GB)']; ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </form>
+        <!-- Dropdown untuk memilih smartphone -->
+        <form method="GET" action="">
+            <label for="smartphone">Pilih Smartphone:</label>
+            <select name="id" id="smartphone" onchange="this.form.submit()">
+                <option value="">Pilih Smartphone</option>
+                <?php foreach ($smartphones as $smartphone): ?>
+                    <option value="<?php echo $smartphone['id']; ?>" <?php echo ($selectedId == $smartphone['id']) ? 'selected' : ''; ?>>
+                        <?php echo $smartphone['Brand'] . ' - ' . $smartphone['Nama Produk'] . ' ' . $smartphone['RAM (GB)'] . '/' . $smartphone['Memori Internal (GB)']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </form>
 
-    <?php if ($data): ?>
-        <h2>ID: <?php echo $data['id']; ?></h2>
-        <h2>Brand: <?php echo $data['Brand']; ?></h2>
-        <h2>Nama Produk: <?php echo $data['Nama Produk']; ?></h2>
+        <?php if ($data): ?>
+            <h2>ID: <?php echo $data['id']; ?></h2>
+            <h2>Brand: <?php echo $data['Brand']; ?></h2>
+            <h2>Nama Produk: <?php echo $data['Nama Produk']; ?></h2>
 
-        <?php
-        // Membuat tabel Gaming
-        createTable("Tabel Gaming", $gamingCriteria, $data);
+            <?php
+            // Membuat tabel Gaming
+            echo createTable("Tabel Gaming", $gamingCriteria, $data);
 
-        // Membuat tabel Fotografi
-        createTable("Tabel Fotografi", $fotografiCriteria, $data);
+            // Membuat tabel Fotografi
+            echo createTable("Tabel Fotografi", $fotografiCriteria, $data);
 
-        // Membuat tabel Konten Kreator
-        createTable("Tabel Konten Kreator", $kontenKreatorCriteria, $data);
+            // Membuat tabel Konten Kreator
+            echo createTable("Tabel Konten Kreator", $kontenKreatorCriteria, $data);
 
-        // Membuat tabel Sehari-hari
-        createTable("Tabel Sehari-hari", $sehariHariCriteria, $data);
-        ?>
-    <?php else: ?>
-        <p>Pilih smartphone untuk melihat detailnya.</p>
-    <?php endif; ?>
+            // Membuat tabel Sehari-hari
+            echo createTable("Tabel Sehari-hari", $sehariHariCriteria, $data);
+            ?>
+        <?php else: ?>
+            <p>Pilih smartphone untuk melihat detailnya.</p>
+        <?php endif; ?>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toggle-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const tableContainer = button.closest('.table-container');
+                    tableContainer.classList.toggle('expanded');
+                    button.querySelector('.icon').textContent = tableContainer.classList.contains('expanded') ? '▲' : '▼';
+                });
+            });
+        });
+    </script>
 </body>
 </html>

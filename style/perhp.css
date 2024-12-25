@@ -1,0 +1,146 @@
+ /* Base Styling */
+ body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f5f5f7;
+    color: #333;
+}
+
+/* Container Styling */
+.container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Container Styling */
+.table-container {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+.table-container th, .table-container td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.table-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.table-container input {
+    width: calc(100% - 20px); /* Adjust width to prevent overflow */
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-size: 1rem;
+}
+
+.table-container .explanation {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.table-container .toggle-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #f2f2f2;
+    color: #333;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+    transition: background-color 0.3s ease;
+}
+
+.table-container .toggle-button:hover {
+    background-color: #e0e0e0;
+}
+
+.table-container .toggle-button .icon {
+    margin-right: 10px;
+}
+
+.table-container .toggle-button .category {
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.table-container .content {
+    display: none;
+}
+
+.table-container.expanded .content {
+    display: block;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Dropdown Styling */
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #ffffff;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .table-container table, .table-container th, .table-container td, .table-container input {
+        font-size: 0.9rem;
+    }
+
+    .table-container th {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .table-container table, .table-container th, .table-container td, .table-container input {
+        font-size: 0.8rem;
+    }
+
+    .table-container th {
+        font-size: 0.9rem;
+    }
+}
