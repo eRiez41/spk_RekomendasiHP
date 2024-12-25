@@ -126,8 +126,8 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
             left: -9999px; /* Opsional: Jauhkan elemen */
         }
     </style>
-    <script src="js/skoringkeseluruhan.js" defer></script>
-    <script src="js/rumuspemilihan.js" defer></script>
+    <script src="js/modulPemilihan/skoringpemilihan.js" defer></script>
+    <script src="js/modulPemilihan/rumuspemilihan.js" defer></script>
 </head>
 <body>
     <h1 class="hidden-element">Skoring HP</h1>

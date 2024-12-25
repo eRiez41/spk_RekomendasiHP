@@ -22,8 +22,9 @@
 </head>
 <body>
     <div class="navbar">
+        <a href="index.php">Home</a>
         <a href="manual.php">Manual</a>
-        <a href="index.php">Per HP</a>
+        <a href="perhp.php">Per HP</a>
         <a href="keseluruhan.php">Keseluruhan</a>
         <a href="pemilihan.php">Pemilihan</a>
     </div>

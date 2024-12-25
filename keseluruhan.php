@@ -117,8 +117,8 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
             display: none;
         }
     </style>
-    <script src="js/skoringkeseluruhan.js" defer></script>
-    <script src="js/rumuskeseluruhan.js" defer></script>
+    <script src="js/modulKeseluruhan/skoringkeseluruhan.js" defer></script>
+    <script src="js/modulKeseluruhan/rumuskeseluruhan.js" defer></script>
     <script src="js/convert.js" defer></script>
 </head>
 <body>

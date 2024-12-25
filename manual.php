@@ -114,7 +114,7 @@
             );
         }
     </script>
-    <script src="js/skoringmanual.js"></script>
-    <script src="js/rumusmanual.js"></script>
+    <script src="js/modulManual/skoringmanual.js"></script>
+    <script src="js/modulManual/rumusmanual.js"></script>
 </body>
 </html>
