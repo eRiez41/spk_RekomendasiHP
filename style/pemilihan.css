@@ -1,0 +1,154 @@
+.hidden-column {
+    display: none;
+}
+.hidden-table {
+    display: none;
+}
+.hidden-element {
+    display: none;
+}
+/* Menyembunyikan tabel gabungan */
+#combined-table {
+    visibility: hidden; /* Menyembunyikan elemen tanpa menghapusnya dari tata letak */
+    opacity: 0; /* Membuat elemen transparan */
+    pointer-events: none; /* Mencegah interaksi pengguna */
+    position: absolute; /* Opsional: Menempatkan elemen di luar pandangan */
+    top: -9999px; /* Opsional: Jauhkan elemen */
+    left: -9999px; /* Opsional: Jauhkan elemen */
+}
+/* Menyembunyikan tabel gabungan */
+#result-table-container {
+    visibility: hidden; /* Menyembunyikan elemen tanpa menghapusnya dari tata letak */
+    opacity: 0; /* Membuat elemen transparan */
+    pointer-events: none; /* Mencegah interaksi pengguna */
+    position: absolute; /* Opsional: Menempatkan elemen di luar pandangan */
+    top: -9999px; /* Opsional: Jauhkan elemen */
+    left: -9999px; /* Opsional: Jauhkan elemen */
+}
+
+/* Gaya tambahan untuk judul dan subjudul */
+h1, h2 {
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.5em;
+    text-align: center;
+    padding-top: 0.35em;
+}
+
+h2 {
+    font-size: 1.5em;
+    text-align: left;
+    margin-left: 20px; /* Menambahkan margin kiri */
+}
+
+/* Gaya tambahan untuk tabel */
+table {
+    width: 95%; /* Mengurangi lebar tabel */
+    border-collapse: collapse;
+    margin: 20px auto; /* Menambahkan margin atas dan bawah serta menengahkan tabel */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Gaya tambahan untuk checkbox dan combo box */
+input[type="checkbox"], select {
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 1em;
+}
+
+label {
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+/* Gaya tambahan untuk container */
+#result-combo-box-container, #price-combo-box-container, #category-combo-box-container, #feature-checkbox-container {
+    margin-bottom: 20px;
+    margin-left: 20px; /* Menambahkan margin kiri */
+}
+
+/* Gaya tambahan untuk container checkbox */
+#brand-checkbox-container {
+    display: flex;
+    flex-direction: row; /* Menyusun secara horizontal */
+    flex-wrap: wrap; /* Memungkinkan baris baru jika terlalu panjang */
+    align-items: center; /* Menyelaraskan item secara vertikal */
+    margin-left: 20px; /* Menambahkan margin kiri */
+}
+
+#brand-checkbox-container .checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Menambahkan margin kanan untuk setiap checkbox-label */
+}
+
+#brand-checkbox-container input[type="checkbox"] {
+    margin-right: 10px; /* Menambahkan margin kanan untuk checkbox */
+}
+
+/* Gaya tambahan untuk container combo box */
+#price-combo-box-container, #category-combo-box-container {
+    margin-left: 20px; /* Menambahkan margin kiri */
+}
+
+/* Gaya tambahan untuk container fitur checkbox */
+#feature-checkbox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px; /* Menambahkan margin kiri */
+}
+
+#feature-checkbox-container label {
+    margin-bottom: 10px; /* Menambahkan margin bawah untuk label */
+}
+
+/* Gaya tambahan untuk container filter */
+#filter-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+#filter-container > div {
+    flex: 1;
+    margin-right: 20px; /* Menambahkan margin kanan untuk setiap elemen filter */
+}
+
+#filter-container > div:last-child {
+    margin-right: 0; /* Menghilangkan margin kanan untuk elemen terakhir */
+}
+
+/* Gaya untuk box berwarna putih */
+.content-box {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 3rem auto; /* Menambahkan margin atas dan bawah */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

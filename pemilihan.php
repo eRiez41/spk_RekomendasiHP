@@ -106,71 +106,61 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skoring HP</title>
-    <style>
-        .hidden-column {
-            display: none;
-        }
-        .hidden-table {
-            display: none;
-        }
-        .hidden-element {
-            display: none;
-        }
-        /* Menyembunyikan tabel gabungan */
-        #combined-table {
-            visibility: hidden; /* Menyembunyikan elemen tanpa menghapusnya dari tata letak */
-            opacity: 0; /* Membuat elemen transparan */
-            pointer-events: none; /* Mencegah interaksi pengguna */
-            position: absolute; /* Opsional: Menempatkan elemen di luar pandangan */
-            top: -9999px; /* Opsional: Jauhkan elemen */
-            left: -9999px; /* Opsional: Jauhkan elemen */
-        }
-    </style>
+    <link rel="stylesheet" href="style/pemilihan.css">
+
     <script src="js/modulPemilihan/skoringpemilihan.js" defer></script>
     <script src="js/modulPemilihan/rumuspemilihan.js" defer></script>
 </head>
-<body>
-    <h1 class="hidden-element">Skoring HP</h1>
+<body class="bg-gray-100">
+    <div class="content-box">
+        <h1>Pemilihan HP</h1>
 
-    <?php
-    foreach ($data as $hp) {
-        echo "<h2 class='hidden-element'>ID: {$hp['id']}</h2>";
-        echo "<h2 class='hidden-element'>Brand: {$hp['Brand']}</h2>";
-        echo "<h2 class='hidden-element'>Nama Produk: {$hp['Nama Produk']}</h2>";
+        <!-- Container untuk menampung semua elemen filter -->
+        <div id="filter-container">
+            <!-- Elemen untuk menampung combo box baru -->
+            <div id="result-combo-box-container"></div>
 
-        // Membuat tabel Gaming
-        createTable("Tabel Gaming", $gamingCriteria, $hp);
+            <!-- Elemen untuk menampung combo box harga -->
+            <div id="price-combo-box-container"></div>
 
-        // Membuat tabel Fotografi
-        createTable("Tabel Fotografi", $fotografiCriteria, $hp);
+            <!-- Elemen untuk menampung combo box kategori -->
+            <div id="category-combo-box-container"></div>
 
-        // Membuat tabel Konten Kreator
-        createTable("Tabel Konten Kreator", $kontenKreatorCriteria, $hp);
+            <!-- Elemen untuk menampung checkbox fitur -->
+            <div id="feature-checkbox-container"></div>
+        </div>
 
-        // Membuat tabel Sehari-hari
-        createTable("Tabel Sehari-hari", $sehariHariCriteria, $hp);
-    }
+        <!-- Elemen untuk menampung tabel lengkap -->
+        <div id="result-table-container"></div>
 
-    // Membuat tabel gabungan
-    createCombinedTable($data);
-    ?>
+        <!-- Elemen untuk menampung tabel lengkap yang difilter -->
+        <div id="filtered-result-table-container"></div>
 
-    <!-- Elemen untuk menampung combo box baru -->
-    <div id="result-combo-box-container"></div>
+        <!-- Elemen untuk menampung tabel gabungan yang disembunyikan -->
+        <div id="combined-table-container" style="display: none;">
+            <?php
+            foreach ($data as $hp) {
+                echo "<h2 class='hidden-element'>ID: {$hp['id']}</h2>";
+                echo "<h2 class='hidden-element'>Brand: {$hp['Brand']}</h2>";
+                echo "<h2 class='hidden-element'>Nama Produk: {$hp['Nama Produk']}</h2>";
 
-    <!-- Elemen untuk menampung tabel lengkap -->
-    <div id="result-table-container"></div>
+                // Membuat tabel Gaming
+                createTable("Tabel Gaming", $gamingCriteria, $hp);
 
-    <!-- Elemen untuk menampung combo box harga dan kategori -->
-    <div id="price-combo-box-container"></div>
-    <div id="category-combo-box-container"></div>
+                // Membuat tabel Fotografi
+                createTable("Tabel Fotografi", $fotografiCriteria, $hp);
 
-    <!-- Elemen untuk menampung tabel lengkap yang difilter -->
-    <div id="filtered-result-table-container"></div>
+                // Membuat tabel Konten Kreator
+                createTable("Tabel Konten Kreator", $kontenKreatorCriteria, $hp);
 
-    <!-- Elemen untuk menampung tabel gabungan yang disembunyikan -->
-    <div id="combined-table-container" style="display: none;">
-        <?php createCombinedTable($data); ?>
+                // Membuat tabel Sehari-hari
+                createTable("Tabel Sehari-hari", $sehariHariCriteria, $hp);
+            }
+
+            // Membuat tabel gabungan
+            createCombinedTable($data);
+            ?>
+        </div>
     </div>
 </body>
 </html>

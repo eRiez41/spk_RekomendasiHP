@@ -56,11 +56,11 @@ function createTable($title, $criteria, $data) {
 }
 
 function createCombinedTable($data) {
-    echo "<h2 class='text-center'>Tabel Gabungan</h2>";
+    echo "<h2 class='text-center'>Tabel Skor Keseluruhan HP</h2>";
     echo "<table border='1' id='combined-table'>";
     echo "<thead>";
     echo "<tr>";
-    echo "<th onclick='sortTable(0)'><span>ID HP</span><span class='sort-icon'></span></th>";
+    // echo "<th class='hidden-content' onclick='sortTable(0)'><span>ID HP</span><span class='sort-icon'></span></th>";
     echo "<th>Brand dan Nama Produk</th>";
     echo "<th onclick='sortTable(2)'><span>Gaming</span><span class='sort-icon'></span></th>";
     echo "<th onclick='sortTable(3)'><span>Fotografi</span><span class='sort-icon'></span></th>";
@@ -74,7 +74,7 @@ function createCombinedTable($data) {
     foreach ($data as $hp) {
         $harga = str_replace(['Rp ', '.'], '', $hp['Harga']);
         echo "<tr>";
-        echo "<td>{$hp['id']}</td>";
+        // echo "<td class='hidden-content'>{$hp['id']}</td>";
         echo "<td>{$hp['Brand']} - {$hp['Nama Produk']} {$hp['RAM (GB)']}/{$hp['Memori Internal (GB)']}</td>";
         echo "<td class='gaming-score'></td>";
         echo "<td class='fotografi-score'></td>";

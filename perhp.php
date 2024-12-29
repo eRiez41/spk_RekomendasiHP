@@ -95,7 +95,7 @@ $conn->close();
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Skoring HP</h1>
+        <h1 class="text-center">Skoring Per HP</h1>
 
         <!-- Dropdown untuk memilih smartphone -->
         <form method="GET" action="">

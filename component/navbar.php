@@ -10,7 +10,7 @@
         <div class="logo">SPK Rekomendasi HP</div>
         <div class="menu">
             <a href="index.php" class="active">Home</a>
-            <a href="manual.php">Manual</a>
+            <a href="manual.php">Perhitungan Manual</a>
             <a href="perhp.php">Per HP</a>
             <a href="keseluruhan.php">Keseluruhan</a>
             <a href="pemilihan.php">Pemilihan</a>

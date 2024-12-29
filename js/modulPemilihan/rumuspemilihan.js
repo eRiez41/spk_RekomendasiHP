@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Membuat checkbox baru
         const resultComboBoxContainer = document.createElement('div');
         resultComboBoxContainer.innerHTML = `
-            <h2>Proses Pemilihan</h2>
+            <h2>Pilih Brand</h2>
             <div id="brand-checkbox-container"></div>
         `;
 
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Menambahkan checkbox baru ke dokumen
-        document.body.appendChild(resultComboBoxContainer);
+        document.querySelector('.content-box').appendChild(resultComboBoxContainer);
 
         // Menambahkan event listener untuk checkbox
         checkboxContainer.addEventListener('change', function() {
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Menambahkan tabel lengkap baru ke dokumen
         resultTableContainer.id = 'result-table-container';
-        document.body.appendChild(resultTableContainer);
+        document.querySelector('.content-box').appendChild(resultTableContainer);
 
         // Membuat combo box harga dan kategori
         createPriceRangeComboBox();
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const newPriceComboBoxContainer = document.createElement('div');
             newPriceComboBoxContainer.id = 'price-combo-box-container';
             newPriceComboBoxContainer.innerHTML = `
-                <h2>Filter Harga</h2>
+                <h2>Pilih Rentang Harga</h2>
                 <select id="price-range-combo-box">
                     <option value="">Pilih Rentang Harga</option>
                     <option value="1000000-2000000">1-2 juta</option>
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const priceComboBox = newPriceComboBoxContainer.querySelector('#price-range-combo-box');
 
             // Menambahkan combo box harga ke dokumen
-            document.body.appendChild(newPriceComboBoxContainer);
+            document.querySelector('.content-box').appendChild(newPriceComboBoxContainer);
 
             // Menambahkan event listener untuk combo box harga
             priceComboBox.addEventListener('change', function() {
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const newFeatureCheckboxContainer = document.createElement('div');
             newFeatureCheckboxContainer.id = 'feature-checkbox-container';
             newFeatureCheckboxContainer.innerHTML = `
-                <h2>Filter Fitur</h2>
+                <h2>Pilih Fitur Penting</h2>
                 <label>
                     <input type="checkbox" id="nfc-checkbox"> NFC
                 </label>
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const jackCheckbox = newFeatureCheckboxContainer.querySelector('#jack-checkbox');
 
             // Menambahkan checkbox fitur ke dokumen
-            document.body.appendChild(newFeatureCheckboxContainer);
+            document.querySelector('.content-box').appendChild(newFeatureCheckboxContainer);
 
             // Menambahkan event listener untuk checkbox NFC
             nfcCheckbox.addEventListener('change', function() {
@@ -264,9 +264,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const newCategoryComboBoxContainer = document.createElement('div');
             newCategoryComboBoxContainer.id = 'category-combo-box-container';
             newCategoryComboBoxContainer.innerHTML = `
-                <h2>Filter Kategori</h2>
+                <h2>Pilih Kebutuhan</h2>
                 <select id="category-combo-box">
-                    <option value="">Pilih Kategori</option>
+                    <option value="">Pilih Kebutuhan</option>
                     <option value="Gaming">Gaming</option>
                     <option value="Fotografi">Fotografi</option>
                     <option value="Konten Kreator">Konten Kreator</option>
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const categoryComboBox = newCategoryComboBoxContainer.querySelector('#category-combo-box');
 
             // Menambahkan combo box kategori ke dokumen
-            document.body.appendChild(newCategoryComboBoxContainer);
+            document.querySelector('.content-box').appendChild(newCategoryComboBoxContainer);
 
             // Menambahkan event listener untuk combo box kategori
             categoryComboBox.addEventListener('change', function() {
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Menambahkan tabel lengkap baru ke dokumen
         resultTableContainer.id = 'filtered-result-table-container';
-        document.body.appendChild(resultTableContainer);
+        document.querySelector('.content-box').appendChild(resultTableContainer);
     }
 
     // Fungsi untuk mendapatkan indeks kolom kategori
