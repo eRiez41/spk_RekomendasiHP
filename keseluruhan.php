@@ -60,7 +60,6 @@ function createCombinedTable($data) {
     echo "<table border='1' id='combined-table'>";
     echo "<thead>";
     echo "<tr>";
-    // echo "<th class='hidden-content' onclick='sortTable(0)'><span>ID HP</span><span class='sort-icon'></span></th>";
     echo "<th>Brand dan Nama Produk</th>";
     echo "<th onclick='sortTable(2)'><span>Gaming</span><span class='sort-icon'></span></th>";
     echo "<th onclick='sortTable(3)'><span>Fotografi</span><span class='sort-icon'></span></th>";
@@ -73,8 +72,41 @@ function createCombinedTable($data) {
 
     foreach ($data as $hp) {
         $harga = str_replace(['Rp ', '.'], '', $hp['Harga']);
-        echo "<tr>";
-        // echo "<td class='hidden-content'>{$hp['id']}</td>";
+        $hpData = json_encode([
+            'Brand' => $hp['Brand'],
+            'NamaProduk' => $hp['Nama Produk'],
+            'TahunRilis' => $hp['Tahun Rilis'],
+            'Jaringan' => $hp['Jaringan'],
+            'Material' => $hp['Material'],
+            'SIMSlots' => $hp['SIM Slots'],
+            'Technology' => $hp['Technology'],
+            'UkuranLayar' => $hp['Ukuran Layar'],
+            'ScreenResolution' => $hp['Screen Resolution'],
+            'OSVersionVersionDetail' => $hp['OS Version & Version Detail'],
+            'Skor_AnTuTu' => $hp['Skor_AnTuTu'],
+            'Prosesor' => $hp['Prosesor'],
+            'RAMGB' => $hp['RAM (GB)'],
+            'MemoriInternalGB' => $hp['Memori Internal (GB)'],
+            'NFC' => $hp['NFC'],
+            'USB' => $hp['USB'],
+            'KapasitasBaterai' => $hp['Kapasitas Baterai'],
+            'DayaFastCharging' => $hp['Daya Fast Charging'],
+            'Waterproof' => $hp['Waterproof'],
+            'Sensor' => $hp['Sensor'],
+            'Jack35mm' => $hp['3.5mm Jack'],
+            'ResolusiKameraBelakang' => $hp['Resolusi Kamera Belakang'],
+            'ResolusiKameraUtamaLainnya' => $hp['Resolusi Kamera Utama Lainnya'],
+            'DualKameraBelakang' => $hp['Dual Kamera Belakang'],
+            'JumlahKameraBelakang' => $hp['Jumlah Kamera Belakang'],
+            'ResolusiKameraDepan' => $hp['Resolusi Kamera Depan'],
+            'DualKameraDepan' => $hp['Dual Kamera Depan'],
+            'Flash' => $hp['Flash'],
+            'DualFlash' => $hp['Dual Flash'],
+            'Video' => $hp['Video'],
+            'Harga' => $hp['Harga'],
+            'ImageURL' => isset($hp['Image URL']) ? $hp['Image URL'] : '' // Tambahkan URL gambar
+        ]);
+        echo "<tr data-hp='$hpData'>";
         echo "<td>{$hp['Brand']} - {$hp['Nama Produk']} {$hp['RAM (GB)']}/{$hp['Memori Internal (GB)']}</td>";
         echo "<td class='gaming-score'></td>";
         echo "<td class='fotografi-score'></td>";
@@ -102,53 +134,7 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skoring HP</title>
     <link rel="stylesheet" href="style/keseluruhan.css">
-    <script>
-        let sortDirection = true; // true for ascending, false for descending
-        let activeColumn = null;
-
-        function sortTable(columnIndex) {
-            const table = document.getElementById('combined-table');
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            const headers = table.querySelectorAll('th');
-
-            // Remove sort icons from all headers
-            headers.forEach(header => {
-                const sortIcon = header.querySelector('.sort-icon');
-                sortIcon.classList.remove('asc', 'desc');
-            });
-
-            // Add sort icon to the active header
-            if (activeColumn === columnIndex) {
-                sortDirection = !sortDirection;
-            } else {
-                sortDirection = true;
-                activeColumn = columnIndex;
-            }
-
-            const activeHeader = headers[columnIndex];
-            const activeSortIcon = activeHeader.querySelector('.sort-icon');
-            activeSortIcon.classList.add(sortDirection ? 'asc' : 'desc');
-
-            rows.sort((a, b) => {
-                const aText = a.querySelectorAll('td')[columnIndex].innerText;
-                const bText = b.querySelectorAll('td')[columnIndex].innerText;
-
-                if (columnIndex === 6) {
-                    // Sort by price (numeric)
-                    const aPrice = parseFloat(aText.replace(/[^0-9.-]+/g, ""));
-                    const bPrice = parseFloat(bText.replace(/[^0-9.-]+/g, ""));
-                    return sortDirection ? aPrice - bPrice : bPrice - aPrice;
-                } else {
-                    // Sort by text
-                    return sortDirection ? aText.localeCompare(bText) : bText.localeCompare(aText);
-                }
-            });
-
-            // Re-append sorted rows to the tbody
-            rows.forEach(row => tbody.appendChild(row));
-        }
-    </script>
+    <script src="js/modulKeseluruhan/nampiltabel.js" defer></script>
     <script src="js/modulKeseluruhan/skoringkeseluruhan.js" defer></script>
     <script src="js/modulKeseluruhan/rumuskeseluruhan.js" defer></script>
     <script src="js/convert.js" defer></script>
@@ -173,6 +159,11 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
         ?>
 
         <button id="export-btn" class="btn">Import ke JSON</button>
+    </div>
+
+    <!-- Pop-up structure -->
+    <div id="popup" class="popup">
+        <div id="popup-content" class="popup-content"></div>
     </div>
 </body>
 </html>

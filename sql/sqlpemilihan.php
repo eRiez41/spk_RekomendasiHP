@@ -15,6 +15,7 @@ $query = "
         sp.`Screen Resolution`,
         sp.`OS Version & Version Detail`,
         s.`antutu_10` AS Skor_AnTuTu,
+        sp.Prosesor,
         sp.`RAM (GB)`,
         sp.`Memori Internal (GB)`,
         sp.NFC,
@@ -33,7 +34,8 @@ $query = "
         sp.Flash,
         sp.`Dual Flash`,
         sp.Video,
-        sp.Harga
+        sp.Harga,
+        sp.`Image URL`
     FROM
         spek_hp sp
     JOIN
@@ -43,6 +45,10 @@ $query = "
 ";
 
 $result = $conn->query($query);
+
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
 
 $data = [];
 if ($result->num_rows > 0) {
