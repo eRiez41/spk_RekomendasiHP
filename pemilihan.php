@@ -110,6 +110,44 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
 
     <script src="js/modulPemilihan/skoringpemilihan.js" defer></script>
     <script src="js/modulPemilihan/rumuspemilihan.js" defer></script>
+
+    <style>
+        /* CSS untuk pop-up */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .popup-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="content-box">
@@ -162,5 +200,63 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
             ?>
         </div>
     </div>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <p id="popup-message">ID: </p>
+            <div id="popup-details"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fungsi untuk menampilkan pop-up
+            function showPopup(id) {
+                const popup = document.getElementById('popup');
+                const popupMessage = document.getElementById('popup-message');
+                const popupDetails = document.getElementById('popup-details');
+                popupMessage.textContent = 'ID: ' + id;
+
+                // Mengambil data dari server
+                fetch('component/get_message.php?id=' + id)
+                    .then(response => response.text())
+                    .then(data => {
+                        popupDetails.innerHTML = data;
+                    })
+                    .catch(error => console.error('Error:', error));
+
+                popup.style.display = 'block';
+            }
+
+            // Fungsi untuk menutup pop-up
+            function closePopup() {
+                const popup = document.getElementById('popup');
+                popup.style.display = 'none';
+            }
+
+            // Menambahkan event listener untuk menutup pop-up saat tombol close diklik
+            const closeButton = document.querySelector('.close');
+            closeButton.addEventListener('click', closePopup);
+
+            // Menambahkan event listener untuk menutup pop-up saat mengklik di luar konten pop-up
+            window.addEventListener('click', function(event) {
+                const popup = document.getElementById('popup');
+                if (event.target == popup) {
+                    closePopup();
+                }
+            });
+
+            // Menambahkan event listener untuk menampilkan pop-up saat baris tabel diklik
+            document.addEventListener('click', function(event) {
+                if (event.target.tagName === 'TD') {
+                    const row = event.target.parentElement;
+                    const id = row.cells[0].textContent.trim();
+                    showPopup(id);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
