@@ -4,18 +4,21 @@ include 'component/navbar.php';
 
 // Fungsi untuk menentukan kategori resolusi layar
 function getResolutionCategory($resolution) {
-    $resolutionParts = explode(' x ', $resolution);
-    $width = intval($resolutionParts[0]);
-    $height = intval($resolutionParts[1]);
+    if (preg_match('/(\d+)\D+(\d+)/', $resolution, $matches)) {
+        $width = intval($matches[1]);
+        $height = intval($matches[2]);
 
-    if ($width >= 720 && $height < 1080) {
-        return 'HD';
-    } elseif ($height >= 1080 && $height < 1440) {
-        return 'FHD';
-    } elseif ($height >= 1440 && $height < 2160) {
-        return '2K';
-    } elseif ($height >= 2160) {
-        return '4K';
+        if ($width >= 720 && $height < 1080) {
+            return 'HD';
+        } elseif ($height >= 1080 && $height < 1440) {
+            return 'FHD';
+        } elseif ($height >= 1440 && $height < 2160) {
+            return '2K';
+        } elseif ($height >= 2160) {
+            return '4K';
+        } else {
+            return 'Unknown';
+        }
     } else {
         return 'Unknown';
     }

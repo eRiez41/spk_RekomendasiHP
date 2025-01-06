@@ -21,21 +21,35 @@ if (isset($_GET['id'])) {
         $imageUrl = $productDetails['Image URL'];
         $brand = $productDetails['Brand'];
         $namaProduk = $productDetails['Nama Produk'];
+        $price = $productDetails['Harga']; // Ambil harga dari database
         unset($productDetails['id']); // Menghapus ID dari array agar tidak ditampilkan
         unset($productDetails['Image URL']); // Menghapus Image URL dari array agar tidak ditampilkan lagi
+        unset($productDetails['Harga']); // Menghapus Harga dari array agar tidak ditampilkan di spesifikasi
 
-        echo "<div style='display: flex; align-items: flex-start;'>";
-        echo "<div style='flex: 1; padding-right: 20px;'>";
+        echo "<div style='display: flex; gap: 10px; align-items: flex-start;'>"; // Jarak antar elemen lebih kecil
+        echo "<div style='flex: 1; padding: 10px;'>";
         foreach ($productDetails as $key => $value) {
-            echo "<p>$key: $value</p>";
+            echo "<p style='margin: 5px 0; font-size: 14px;'><strong>$key:</strong> $value</p>";
         }
         echo "</div>";
-        echo "<div style='flex: 1; display: flex; flex-direction: column; align-items: center; padding: 10px;'>";
-        echo "<img src='$imageUrl' alt='Product Image' style='max-width: 100%; height: auto; margin: 0 auto;'>";
-        echo "<a href='https://www.tokopedia.com/search?st=product&q=" . urlencode("$brand $namaProduk") . "' target='_blank' style='margin-top: 10px; text-decoration: none; color: blue;'>Link Tokped</a>";
-        echo "<a href='https://shopee.co.id/search?keyword=" . urlencode("$brand $namaProduk") . "' target='_blank' style='margin-top: 10px; text-decoration: none; color: blue;'>Link Shopee</a>";
+        echo "<div style='flex: 1; text-align: center; padding: 10px;'>";
+        echo "<img src='$imageUrl' alt='Product Image' style='max-width: 150px; height: auto; margin-bottom: 10px;'>"; // Gambar lebih kecil
+        echo "<p style='margin: 10px 0; font-size: 16px; font-weight: bold;'>Harga: $price</p>"; // Harga di bawah gambar
+        echo "<div style='margin-top: 10px;'>";
+
+        // Tombol marketplace
+        echo "<a href='https://www.tokopedia.com/search?st=product&q=" . urlencode("$brand $namaProduk") . "' target='_blank' style='display: inline-block; margin: 5px; padding: 8px 16px; background: #4caf50; color: white; text-decoration: none; border-radius: 5px;'>Link Tokped</a>";
+        echo "<a href='https://shopee.co.id/search?keyword=" . urlencode("$brand $namaProduk") . "' target='_blank' style='display: inline-block; margin: 5px; padding: 8px 16px; background: #ff5722; color: white; text-decoration: none; border-radius: 5px;'>Link Shopee</a>";
+
+        echo "</div>";
+        // Tombol beri penilaian
+        echo "<div style='margin-top: 15px;'>"; // Margin tambahan untuk jarak
+        echo "<a href='https://forms.gle/ik7qbmuzU4ELgLdz5' target='_blank' style='display: inline-block; margin: 5px; padding: 8px 16px; background: #2196f3; color: white; text-decoration: none; border-radius: 5px;'>Beri Penilaian</a>";
+        echo "</div>";
+
         echo "</div>";
         echo "</div>";
+
     } else {
         echo 'TABLE IS FALSE';
     }

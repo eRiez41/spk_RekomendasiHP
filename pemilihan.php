@@ -147,6 +147,11 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* Kelas untuk menyembunyikan elemen */
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -205,7 +210,7 @@ $sehariHariCriteria = ["RAM (GB)", "Memori Internal (GB)", "Skor_AnTuTu", "Kapas
     <div id="popup" class="popup">
         <div class="popup-content">
             <span class="close">&times;</span>
-            <p id="popup-message">ID: </p>
+            <p id="popup-message" class="hidden">ID: </p>
             <div id="popup-details"></div>
         </div>
     </div>
