@@ -38,8 +38,8 @@ function getSmartphoneData($conn, $selectedId) {
             sp.Harga
         FROM
             spek_hp sp
-        JOIN
-            soc s ON sp.Prosesor LIKE CONCAT('%', s.processor, '%')
+        LEFT JOIN
+            soc s ON INSTR(REPLACE(sp.Prosesor, ',', ''), s.processor) > 0
         WHERE
             sp.id = ?
         LIMIT 1;

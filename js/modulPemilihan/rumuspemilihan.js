@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const newFeatureCheckboxContainer = document.createElement('div');
             newFeatureCheckboxContainer.id = 'feature-checkbox-container';
             newFeatureCheckboxContainer.innerHTML = `
-                <h2>Pilih Fitur Penting</h2>
+                <h2>Pilih Fitur Penting (Centang yang fitur nya perlu ada)</h2>
                 <label>
                     <input type="checkbox" id="nfc-checkbox"> NFC
                 </label>
@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Membuat tabel lengkap baru
         const resultTableContainer = document.createElement('div');
         resultTableContainer.innerHTML = `
-            <h2>Data Lengkap (Filtered by Price Range and Category)</h2>
+            <h2>Data Lengkap (Klik kolom tabel untuk detail spesifikasi)</h2>
             <table border='1' id='filtered-result-table'>
                 <thead>
                     <tr>

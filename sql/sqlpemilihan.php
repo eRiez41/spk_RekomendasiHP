@@ -15,7 +15,7 @@ $query = "
         sp.`Screen Resolution`,
         sp.`OS Version & Version Detail`,
         s.`antutu_10` AS Skor_AnTuTu,
-        sp.Prosesor,
+        TRIM(REPLACE(sp.Prosesor, ',', '')) AS Prosesor,
         sp.`RAM (GB)`,
         sp.`Memori Internal (GB)`,
         sp.NFC,
@@ -38,8 +38,8 @@ $query = "
         sp.`Image URL`
     FROM
         spek_hp sp
-    JOIN
-        soc s ON sp.Prosesor LIKE CONCAT('%', s.processor, '%')
+    LEFT JOIN
+        soc s ON INSTR(REPLACE(sp.Prosesor, ',', ''), s.processor) > 0
     ORDER BY
         sp.id ASC;
 ";
